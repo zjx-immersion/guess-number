@@ -59,6 +59,18 @@ public class AnswerTest {
 
     }
 
+    @Test
+    public void should_return_2A2B_when_1_3_are_all_correct_and_4_2_are_only_include() {
+        // given
+        String orginalAnswerStr = "1 2 3 4";
+        String userAnswerStr = "1 4 3 2";
+        String expectedResult = "2A2B";
+
+        // when
+        validateGuessResult(userAnswerStr, expectedResult);
+
+    }
+
     private void validateGuessResult(String userAnswerStr, String expectedResult) {
         // when
         String actualRestlt = answer.check(userAnswerStr);

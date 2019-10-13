@@ -25,20 +25,20 @@ public class Answer {
 
     public String check(String userAnswerStr) {
         List<Integer> userAnswer = formatAnswer(userAnswerStr);
-        final Integer[] record = {0, 0};
+//        final Integer[] record = {0, 0};
+        Record record = new Record();
 
         this.numList.forEach(originalNum -> {
             int indexOfIndicatedNum = userAnswer.indexOf(originalNum);
             if (indexOfIndicatedNum != -1) {
                 if (this.numList.indexOf(originalNum) == indexOfIndicatedNum) {
-                    record[0]++;
+                    record.increateCorrectCount();
                 } else {
-                    record[1]++;
+                    record.increateIncludeOnlyCount();
                 }
             }
         });
 
-        String result = String.format("%1$sA%2$sB", record[0], record[1]);
-        return result;
+        return record.getValue();
     }
 }
