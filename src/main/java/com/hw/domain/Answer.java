@@ -38,23 +38,7 @@ public class Answer {
             }
         });
 
-        if (record[0] == 4) {
-            return "4A0B";
-        } else if (record[0] == 1) {
-            return "1A1B";
-        } else {
-            return "0A0B";
-        }
+        String result = String.format("%1$sA%2$sB", record[0], record[1]);
+        return result;
     }
 }
-//            userAnswer.stream().forEach(num -> {
-//                int index = userAnswer.indexOf(num);
-//                if (index != -1) {
-//                    long[] guessResult = new long[2];
-//                    if (index == this.numList.indexOf(num)) {
-//                        guessResult[0]++;
-//                    } else {
-//                        guessResult[1]++;
-//                    }
-//                }
-//            });
