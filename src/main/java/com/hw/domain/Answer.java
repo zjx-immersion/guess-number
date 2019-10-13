@@ -9,6 +9,10 @@ public class Answer {
     }
 
     public String check(String userAnswerStr) {
-        return "0A0B";
+        if (userAnswerStr.equals(this.orginalAnswerStr)) {
+            return "4A0B";
+        } else {
+            return "0A0B";
+        }
     }
 }
