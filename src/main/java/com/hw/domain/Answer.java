@@ -2,6 +2,7 @@ package com.hw.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 
@@ -24,16 +25,23 @@ public class Answer {
 
     public String check(String userAnswerStr) {
         List<Integer> userAnswer = formatAnswer(userAnswerStr);
-        Integer correctCount = 0;
+        final Integer[] record = {0, 0};
 
-        for (int i = 0; i < this.numList.size(); i++) {
-            if (this.numList.get(i) == userAnswer.get(i)) {
-                correctCount++;
-                continue;
+        this.numList.forEach(originalNum -> {
+            int indexOfIndicatedNum = userAnswer.indexOf(originalNum);
+            if (indexOfIndicatedNum != -1) {
+                if (this.numList.indexOf(originalNum) == indexOfIndicatedNum) {
+                    record[0]++;
+                } else {
+                    record[1]++;
+                }
             }
-        }
-        if (correctCount == 4) {
+        });
+
+        if (record[0] == 4) {
             return "4A0B";
+        } else if (record[0] == 1) {
+            return "1A1B";
         } else {
             return "0A0B";
         }
