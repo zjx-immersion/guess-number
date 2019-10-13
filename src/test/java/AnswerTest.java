@@ -35,4 +35,21 @@ public class AnswerTest {
         Assert.assertSame(expectedResult, actualRestlt);
 
     }
+
+//    @Test
+//    public void should_return_1A0B_when_only_1_is_correct() {
+//        // given
+//        String orginalAnswerStr = "1 2 3 4";
+//        Answer answer = new Answer(orginalAnswerStr);
+//        String userAnswerStr = "1 5 2 7";
+//        String expectedResult = "1A0B";
+//
+//        // when
+//        String actualRestlt = answer.check(userAnswerStr);
+//
+//        // then
+//        Assert.assertSame(expectedResult, actualRestlt);
+//
+//    }
+
 }
