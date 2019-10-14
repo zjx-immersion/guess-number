@@ -3,17 +3,27 @@ import com.hw.domain.AnswerGenerator;
 import com.hw.domain.AnswerGeneratorStub;
 import com.hw.domain.Game;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class GameTest {
 
+    private Game game;
+
+    @Before
+    public void setUp() throws Exception {
+        this.game = initGame();
+    }
+
+    private Game initGame() {
+        Answer answer = new Answer("1 2 3 4");
+        AnswerGenerator answerGeneratorStub = new AnswerGeneratorStub(answer);
+        return new Game(answerGeneratorStub);
+    }
 
     @Test
     public void should_get_success_when_input_right_answer_first_time() {
         // given
-        Answer answer = new Answer("1 2 3 4");
-        AnswerGenerator answerGeneratorStub = new AnswerGeneratorStub(answer);
-        Game game = new Game(answerGeneratorStub);
         String userAnswer = "1 2 3 4";
         String expectedGuessResult = "4A0B";
         String expectedStatus = "success";
@@ -31,15 +41,13 @@ public class GameTest {
     @Test
     public void should_get_the_fail_status_when_guess_action_count_over_or_equal_6() {
         // given
-        Answer answer = new Answer("1 2 3 4");
-        AnswerGenerator answerGeneratorStub = new AnswerGeneratorStub(answer);
-        Game game = new Game(answerGeneratorStub);
         String userAnswer1 = "4 3 2 1";
         String userAnswer2 = "4 3 2 1";
         String userAnswer3 = "4 3 2 1";
         String userAnswer4 = "4 3 2 1";
         String userAnswer5 = "4 3 2 1";
         String userAnswer6 = "4 3 2 1";
+
         String expectStatusOfGame = "fail";
 
         // when
@@ -52,7 +60,44 @@ public class GameTest {
         String statusOfGame = game.checkStatus();
 
         // then
-        Assert.assertEquals(expectStatusOfGame, statusOfGame); // ??
-
+        Assert.assertEquals(expectStatusOfGame, statusOfGame);
     }
+
+    @Test
+    public void should_get_the_success_status_when_second_guess_input_is_correct() {
+        // given
+        String userAnswer1 = "4 3 2 1";
+        String userAnswer2 = "1 2 3 4";
+
+        String expectStatusOfGame = "success";
+
+        // when
+        String result1 = game.guess(userAnswer1);
+        String result2 = game.guess(userAnswer2);
+        String statusOfGame = game.checkStatus();
+
+        // then
+        Assert.assertEquals(expectStatusOfGame, statusOfGame);
+    }
+
+    @Test
+    public void should_get_the_continue_status_when_guess_action_count_less_than_6() {
+        // given
+        String userAnswer1 = "4 3 2 1";
+        String userAnswer2 = "4 3 2 1";
+
+        String expectStatusOfGame = "continue";
+
+        // when
+        String result1 = game.guess(userAnswer1);
+        String result2 = game.guess(userAnswer2);
+        String statusOfGame = game.checkStatus();
+
+        // then
+        Assert.assertEquals(expectStatusOfGame, statusOfGame);
+    }
+
+
+
+
 }

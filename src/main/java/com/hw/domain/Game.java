@@ -27,8 +27,10 @@ public class Game {
         boolean isSuccess = guessResults.stream().anyMatch(result -> result.equals("4A0B"));
         if (isSuccess) {
             return "success";
-        } else {
+        } else if (guessResults.size() == 6) {
             return "fail";
+        } else {
+            return "continue";
         }
     }
 }
