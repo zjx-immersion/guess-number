@@ -132,8 +132,6 @@ public class GameTest {
         String userAnswer6 = "4 3 2 1";
         String userAnswer7 = "1 2 3 4";
 
-        String expectStatusOfGame = "success";
-
         // when
         String result1 = game.guess(userAnswer1);
         String result2 = game.guess(userAnswer2);
@@ -147,4 +145,22 @@ public class GameTest {
 
 
     }
+
+    @Test(expected = OutOfGuessCountException.class)
+    public void should_throw_exception_when_call_guess_after_correct_guess_action_number_less_6() throws OutOfGuessCountException {
+        // given
+        String userAnswer1 = "4 3 2 1";
+        String userAnswer2 = "1 2 3 4";
+        String userAnswer3 = "1 2 3 4";
+
+        // when
+        String result1 = game.guess(userAnswer1);
+        String result2 = game.guess(userAnswer2);
+        String result3 = game.guess(userAnswer3);
+
+        // then throw execption
+
+
+    }
+
 }
