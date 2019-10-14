@@ -17,7 +17,10 @@ public class Game {
         this.guessResults = new ArrayList<>();
     }
 
-    public String guess(String userAnswer) {
+    public String guess(String userAnswer) throws OutOfGuessCountException {
+        if (this.guessResults.size() >= 6) {
+            throw new OutOfGuessCountException("Guess count cant over 6!");
+        }
         String guessResult = this.originalAnswer.check(userAnswer);
         this.guessResults.add(guessResult);
         return guessResult;
