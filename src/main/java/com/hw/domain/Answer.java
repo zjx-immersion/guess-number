@@ -25,7 +25,6 @@ public class Answer {
 
     public String check(String userAnswerStr) {
         List<Integer> userAnswer = formatAnswer(userAnswerStr);
-//        final Integer[] record = {0, 0};
         Record record = new Record();
 
         this.numList.forEach(originalNum -> {
