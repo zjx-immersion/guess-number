@@ -119,8 +119,6 @@ public class GameTest {
         Assert.assertEquals(expectStatusOfGame, statusOfGame);
     }
 
-
-
     @Test(expected = OutOfGuessCountException.class)
     public void should_throw_exception_when_call_guess_after_incorrect_guess_action_number_over_6() throws OutOfGuessCountException {
         // given

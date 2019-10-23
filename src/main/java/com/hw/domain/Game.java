@@ -10,6 +10,9 @@ public class Game {
     private final AnswerGenerator answerGeneratorStub;
     private final Answer originalAnswer;
     private final List<String> guessResults;
+    private final String CORRECT_ANSWER_RESULT_STANDAR = "4A0B";
+    private final String GAME_SUCCESS_STATUS = "success";
+    private final String GAME_CONTIMUE_STATUS = "continue";
 
     public Game(AnswerGenerator AnswerGenerator) {
         this.answerGeneratorStub = AnswerGenerator;
@@ -18,7 +21,7 @@ public class Game {
     }
 
     public String guess(String userAnswer) throws OutOfGuessCountException {
-        if (this.guessResults.size() >= 6 || this.checkStatus() != "continue") {
+        if (this.checkStatus() != "continue") {
             throw new OutOfGuessCountException("Guess count cant over 6!");
         }
         String guessResult = this.originalAnswer.check(userAnswer);
@@ -27,13 +30,14 @@ public class Game {
     }
 
     public String checkStatus() {
-        boolean isSuccess = guessResults.stream().anyMatch(result -> result.equals("4A0B"));
+        boolean isSuccess = guessResults.stream().anyMatch(result -> result.equals(CORRECT_ANSWER_RESULT_STANDAR));
         if (isSuccess) {
-            return "success";
+            return GAME_SUCCESS_STATUS;
         } else if (guessResults.size() == 6) {
-            return "fail";
+            String GAME_FAIL_STATUS = "fail";
+            return GAME_FAIL_STATUS;
         } else {
-            return "continue";
+            return GAME_CONTIMUE_STATUS;
         }
     }
 }
