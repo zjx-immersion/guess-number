@@ -1,4 +1,5 @@
-package com.hw.domain;
+import com.hw.domain.Answer;
+import com.hw.domain.AnswerGenerator;
 
 public class AnswerGeneratorStub implements AnswerGenerator {
 
